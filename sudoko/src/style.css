@@ -143,3 +143,81 @@
      background-color: blueviolet;
      color: black;
  }
+
+
+ .fixCell {
+     font-weight: bold;
+ }
+
+ #won {
+     background-color: gold;
+ }
+
+ #error {
+     background-color: red;
+     color: white;
+     text-align: center;
+
+ }
+
+ .bar {
+     height: 5rem;
+     padding-top: 3rem;
+     border: 2px solid white;
+     border-radius: 10px;
+     box-shadow: inset -3px -3px 5px rgba(0, 0, 0, .5);
+     text-align: center;
+     position: fixed;
+     align-self: center;
+     font-size: xx-large;
+     font-weight: bold;
+     width: 80%;
+     left: 10%;
+     top: 45%;
+ }
+
+ .hidden {
+     visibility: hidden;
+ }
+
+ .dialog {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .dialogButton {
+     background-color: dimgray;
+     color: white;
+     box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
+     width: 100px;
+     height: 1em;
+     margin-top: 10px;
+     padding-top: 1em;
+     padding-bottom: 1em;
+     border: 2px solid white;
+     border-radius: 10px;
+     text-align: center;
+     cursor: pointer;
+ }
+
+ .button {
+     background-color: dimgray;
+     color: white;
+     box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
+     width: 50px;
+     height: 1em;
+     margin-bottom: 10px;
+     margin-right: 10px;
+     padding-top: 1em;
+     padding-bottom: 1em;
+     border: 2px solid white;
+     border-radius: 10px;
+     text-align: center;
+     cursor: pointer;
+ }
+
+ #newGame {
+     padding-top: 0.5em;
+     padding-bottom: 1.5em;
+ }

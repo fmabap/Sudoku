@@ -1,6 +1,7 @@
 export interface col {
     colNo: number,
-    value: number
+    value: number,
+    fix: boolean
 }
 
 export interface row {

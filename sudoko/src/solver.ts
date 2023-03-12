@@ -105,7 +105,7 @@ export class Solver {
         return false;
     }
 
-    private isValueAllowed(board: board, colNo: number, rowNo: number, value: number) {
+    public isValueAllowed(board: board, colNo: number, rowNo: number, value: number) {
         if (!this.hasRowValue(board, rowNo, value) && !this.hasColValue(board, colNo, value) && !this.hasBoxValue(board, colNo, rowNo,
             value)) {
             return true;
@@ -113,8 +113,18 @@ export class Solver {
         else
             return false;
     }
-}
 
+    public isWon(board: board): boolean {
+        for (let rowNo = 0; rowNo < GRID_SIZE; rowNo++) {
+            for (let colNo = 0; colNo < GRID_SIZE; colNo++) {
+                if (board.rows[rowNo].cols[colNo].value === 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
 interface cell {
     rowNo: number,
     colNo: number,

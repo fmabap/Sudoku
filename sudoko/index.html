@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 
 <head>
   <meta charset="UTF-8" />
@@ -52,7 +52,12 @@
                   <div class="actionNumber colorNumber9 actionNumberSel">
                     9
                   </div>
+                  <div class="actionNumber colorNumber0 actionNumberSel">
+                    delete
+                  </div>
                 </div>
+                <div id="resetGame" class="button ">Reset</div>
+                <div id="newGame" class="button">New Game</div>
               </form>
             </div>
           </td>
@@ -381,11 +386,40 @@
               </table>
             </div>
           </td>
-
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div id="error" class="hidden">not solveable</div>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <div id="won" class="hidden bar">You won</div>
+
+  <dialog id="dialogNewGame">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <h3 class="dialog">New Game</h3>
+            <form method="dialog">
+              <div class="dialog">
+                <label for="rangeValues">Count of given numbers</label>
+                <input type="range" min="25" max="80" value="50" id="inputCountNumbers"
+                  oninput="this.nextElementSibling.value = this.value" />
+                <output>50</output>
+              </div>
+              <div class="dialog">
+                <div id="dialogNewOk" class="dialogButton">Start Game
+                </div>
+              </div>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </dialog>
 </body>
 
 </html>
