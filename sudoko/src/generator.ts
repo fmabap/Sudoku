@@ -5,10 +5,6 @@ export default class Generator {
 
     private board: board = { rows: [] };
 
-    public constructor() {
-        this.createInitialBoard();
-    }
-
     public getBoard(): board {
         return this.board;
     }
@@ -25,9 +21,15 @@ export default class Generator {
     }
 
     public generateSudoko() {
-        this.fillBoxes();
-        const solver = new Solver();
-        solver.solve(this.board);
+        while (true) {
+            this.createInitialBoard();
+            this.fillBoxes();
+            const solver = new Solver();
+
+            if (solver.solve(this.board) === true) {
+                break;
+            }
+        }
     }
 
     private fillBoxes() {
@@ -82,19 +84,36 @@ export default class Generator {
         return array;
     }
     public printBoard() {
-        let rows: String[] = [];
-        let rowStr: String = "";
+        let rows: string[] = [];
+        let rowStr: string = "";
+        let helpLine: string = "_";
+        for (let index = 1; index <= GRID_SIZE; index++) {
+            helpLine = helpLine + "_";
+            if (index % BOX_SIZE === 0) {
+                helpLine = helpLine + "_"
+            }
+        }
+
         this.board.rows.forEach(row => {
             rowStr = "";
             row.cols.forEach(col => {
-                rowStr = rowStr + '|' + col.value.toString();
+                if (col.colNo % BOX_SIZE === 0) {
+                    rowStr = rowStr + '|';
+                }
+                rowStr = rowStr + col.value.toString();
             })
             rowStr = rowStr + "|";
+            if (row.rowNo % BOX_SIZE === 0) {
+                rows.push(helpLine);
+            }
             rows.push(rowStr);
 
         });
+        rows.push(helpLine);
+        rows.forEach(row => {
+            console.log(row);
+        });
 
-        console.log(rows);
     }
 }
 

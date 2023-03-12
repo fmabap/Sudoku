@@ -4,11 +4,11 @@ export class Solver {
 
     public solve(board: board): boolean {
         let valueSet: boolean = true;
-        let freeCell: cell | undefined = { rowNo: 0, colNo: 0, value: 0 };
+        let freeCell: cell | undefined;
         let cells: cell[] = [];
         while (true) {
 
-            if (valueSet = true) {
+            if (valueSet === true) {
                 freeCell = this.getNextFreeCell(board);
                 if (freeCell === undefined) {
                     // all Cells on board set sudoko solved
@@ -27,6 +27,7 @@ export class Solver {
                 // No allowed value found
                 if (cells.length === 0) {
                     // no valid sudoko
+                    console.log("Sudoko not valid");
                     return false;
                 }
                 // Reset last cell and check it again with next allowed value
@@ -35,6 +36,7 @@ export class Solver {
                 valueSet = false;
             }
         }
+        console.log("Sudoko valid");
         return true;
     }
 
@@ -53,6 +55,7 @@ export class Solver {
         for (let value = cell.value + 1; value <= GRID_SIZE; value++) {
             if (this.isValueAllowed(board, cell.colNo, cell.rowNo, value)) {
                 cell.value = value;
+                return;
             }
         }
         cell.value = 0;
