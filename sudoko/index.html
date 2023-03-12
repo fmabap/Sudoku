@@ -14,53 +14,14 @@
     <table class="topTable">
       <tbody>
         <tr>
-          <td colspan="2">
+          <td>
             <div id="header" class="header">
               <span>Sudoko</span>
             </div>
           </td>
         </tr>
         <tr>
-          <td class="actionsCol">
-            <div class="actions">
-              <form>
-                <div id="actions">
-                  <div class="actionNumber colorNumber1 actionNumberSel">
-                    1
-                  </div>
-                  <div class="actionNumber colorNumber2 actionNumberSel">
-                    2
-                  </div>
-                  <div class="actionNumber colorNumber3 actionNumberSel">
-                    3
-                  </div>
-                  <div class="actionNumber colorNumber4 actionNumberSel">
-                    4
-                  </div>
-                  <div class="actionNumber colorNumber5 actionNumberSel">
-                    5
-                  </div>
-                  <div class="actionNumber colorNumber6 actionNumberSel">
-                    6
-                  </div>
-                  <div class="actionNumber colorNumber7 actionNumberSel">
-                    7
-                  </div>
-                  <div class="actionNumber colorNumber8 actionNumberSel">
-                    8
-                  </div>
-                  <div class="actionNumber colorNumber9 actionNumberSel">
-                    9
-                  </div>
-                  <div class="actionNumber colorNumber0 actionNumberSel">
-                    delete
-                  </div>
-                </div>
-                <div id="resetGame" class="button ">Reset</div>
-                <div id="newGame" class="button">New Game</div>
-              </form>
-            </div>
-          </td>
+
           <td class="boardCol">
             <div id="board" class="board">
               <table cellspacing="0" cellpadding="0">
@@ -388,7 +349,85 @@
           </td>
         </tr>
         <tr>
-          <td colspan="2">
+          <td class="actionsCol">
+            <div class="actions2">
+              <form>
+                <div id="actions">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="actionNumber colorNumber1 actionNumberSel">
+                            1
+                          </div>
+                        </td>
+                        <td>
+                          <div class="actionNumber colorNumber2 actionNumberSel">
+                            2
+                          </div>
+                        </td>
+                        <td>
+                          <div class="actionNumber colorNumber3 actionNumberSel">
+                            3
+                          </div>
+                        </td>
+                        <td>
+                          <div class="actionNumber colorNumber4 actionNumberSel">
+                            4
+                          </div>
+                        </td>
+                        <td>
+                          <div class="actionNumber colorNumber5 actionNumberSel">
+                            5
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="actionNumber colorNumber6 actionNumberSel">
+                            6
+                          </div>
+                        </td>
+
+                        <td>
+                          <div class="actionNumber colorNumber7 actionNumberSel">
+                            7
+                          </div>
+                        </td>
+                        <td>
+                          <div class="actionNumber colorNumber8 actionNumberSel">
+                            8
+                          </div>
+                        </td>
+                        <td>
+                          <div class="actionNumber colorNumber9 actionNumberSel">
+                            9
+                          </div>
+                        </td>
+
+                        <td>
+                          <div class="actionNumber colorNumber0 actionNumberSel">
+                            delete
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="4">
+                          <div id="resetGame" class="button">Reset</div>
+                        </td>
+                        <td>
+                          <div id="newGame" class="button">New Game</div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
             <div id="error" class="hidden">not solveable</div>
           </td>
         </tr>
