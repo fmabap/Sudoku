@@ -88,19 +88,18 @@ export class Solver {
     private hasBoxValue(board: board, colNo: number, rowNo: number, value: number): boolean {
         let boxStartRowNo = rowNo - rowNo % BOX_SIZE;
         let boxStartColNo = colNo - colNo % BOX_SIZE;
-        let curRowNo = boxStartRowNo;
+        let curRowNo = boxStartRowNo - 1;
         let curColNo = boxStartColNo;
 
         for (let index = 0; index < GRID_SIZE; index++) {
-            if (board.rows[curRowNo].cols[curColNo].value === value) {
-                return true;
-            }
-            curColNo = curColNo + 1;
-            index = index + 1;
             if (index % BOX_SIZE === 0) {
                 curRowNo = curRowNo + 1;
                 curColNo = boxStartColNo;
             }
+            if (board.rows[curRowNo].cols[curColNo].value === value) {
+                return true;
+            }
+            curColNo = curColNo + 1;
         }
         return false;
     }
