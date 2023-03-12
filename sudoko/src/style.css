@@ -44,16 +44,11 @@
  }
 
 
- .actions2 {
+ .actions {
      margin-left: 2rem !important;
      margin-right: 2rem !important;
      display: flex;
      justify-content: center;
- }
-
- .actions {
-     position: static;
-     margin-left: 2rem !important;
  }
 
  .borderTop>td>div {
@@ -134,7 +129,7 @@
  }
 
  .colorNumber5 {
-     background-color: lightskyblue;
+     background-color: lightseagreen;
      color: black;
  }
 

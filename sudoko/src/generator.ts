@@ -116,11 +116,11 @@ export default class Generator {
     public printBoard() {
         let rows: string[] = [];
         let rowStr: string = "";
-        let helpLine: string = "_";
+        let helpLine: string = "-";
         for (let index = 1; index <= GRID_SIZE; index++) {
-            helpLine = helpLine + "_";
+            helpLine = helpLine + "-";
             if (index % BOX_SIZE === 0) {
-                helpLine = helpLine + "_"
+                helpLine = helpLine + "-"
             }
         }
 
