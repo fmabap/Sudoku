@@ -1,2 +1,2 @@
-# sudoko
-Sudoko
+# sudoku
+Sudoku
