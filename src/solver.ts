@@ -11,7 +11,7 @@ export class Solver {
             if (valueSet === true) {
                 freeCell = this.getNextFreeCell(board);
                 if (freeCell === undefined) {
-                    // all Cells on board set sudoko solved
+                    // all Cells on board set sudoku solved
                     break;
                 }
             }
@@ -26,8 +26,8 @@ export class Solver {
             else {
                 // No allowed value found
                 if (cells.length === 0) {
-                    // no valid sudoko
-                    console.log("Sudoko not valid");
+                    // no valid sudoku
+                    console.log("Sudoku not valid");
                     return false;
                 }
                 // Reset last cell and check it again with next allowed value
@@ -36,7 +36,7 @@ export class Solver {
                 valueSet = false;
             }
         }
-        console.log("Sudoko valid");
+        console.log("Sudoku valid");
         return true;
     }
 

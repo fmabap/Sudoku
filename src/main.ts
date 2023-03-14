@@ -35,7 +35,7 @@ function testConv() {
 }
 
 function showBoard() {
-    generator.generateSudoko();
+    generator.generateSudoku();
     generator.printBoard();
     generator.reduceBoard((GRID_SIZE * GRID_SIZE) - ui.getCountNumbers());
     ui.initBoard(generator.getBoard());

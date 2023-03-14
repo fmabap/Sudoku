@@ -11,7 +11,7 @@ export default class Generator {
 
 
 
-    public generateSudoko() {
+    public generateSudoku() {
         while (true) {
             this.createInitialBoard();
             this.fillBoxes();
