@@ -8,6 +8,8 @@ export default class Ui {
     solver: Solver
     callBackNewGameStart!: Function;
     generator: Generator;
+    errNotSolveable: string;
+    errNotAllowed: string;
     constructor(generator: Generator) {
         this.solver = new Solver();
         this.addClickEventDialogNewGameStart();
@@ -16,7 +18,11 @@ export default class Ui {
         this.addClickEventActionNumber();
         this.addClickEventCells();
         this.addClickEventDelete();
+        this.addClickEventToHeader();
         this.generator = generator;
+        this.errNotSolveable = "Not solveable";
+        this.errNotAllowed = "Not allowed"
+        this.setText();
     }
 
     public initBoard(board: board) {
@@ -53,6 +59,18 @@ export default class Ui {
                 cell.classList.remove("fixCell");
             }
         }
+    }
+
+    public addClickEventToHeader() {
+
+        let header = <HTMLDivElement>document.getElementById("header");
+        header.addEventListener("click", async () => { this.clickOnHeader(); });
+
+
+    }
+
+    private clickOnHeader() {
+        window.location.href = "https://github.com/fmabap/sudoku";
     }
 
     public addClickEventActionNumber() {
@@ -170,16 +188,16 @@ export default class Ui {
                     }
                 }
                 else {
-                    this.toastError("not solveable");
+                    this.toastError(this.errNotSolveable);
                 }
 
             }
             else {
-                this.toastError("not allowed");
+                this.toastError(this.errNotAllowed);
             }
         }
         else {
-            this.toastError("not allowed");
+            this.toastError(this.errNotAllowed);
         }
     }
 
@@ -266,5 +284,28 @@ export default class Ui {
         dialog.close();
         this.callBackNewGameStart();
     }
+    private setText() {
+        let newGameHeadLine = <HTMLHeadingElement>document.getElementById("newGameHeadLine")
+        let labelCountNumbers = <HTMLLabelElement>document.getElementById("labelCountNumbers");
+        let labelCheckSolveable = <HTMLLabelElement>document.getElementById("labelCheckSolveable");
+        let dialogNewOk = <HTMLDivElement>document.getElementById("dialogNewOk");
+        let deleteButton = <HTMLDivElement>document.getElementById("delete")
+        let resetGame = <HTMLDivElement>document.getElementById("resetGame")
+        let newGame = <HTMLDivElement>document.getElementById("newGame")
+        let won = <HTMLDivElement>document.getElementById("won")
 
+
+        if (navigator.language.indexOf("de") > -1) {
+            newGameHeadLine.innerText = "Neues Spiel";
+            labelCountNumbers.innerText = "Anzahl Zahlen";
+            labelCheckSolveable.innerText = "Lösbarkeit überprüfen";
+            dialogNewOk.innerText = "Spiel starten";
+            deleteButton.innerText = "Entf.";
+            resetGame.innerText = "Reset";
+            newGame.innerHTML = "Neues Spiel";
+            won.innerHTML = "Du hast gewonnen"
+            this.errNotSolveable = "Nicht lösbar";
+            this.errNotAllowed = "Nicht erlaubt";
+        }
+    }
 }

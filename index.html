@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" translate="no">
+<html lang="en" class="notranslate" translate="no">
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="google" content="notranslate" />
   <title>Sudoku</title>
   <link rel="stylesheet" href="/src/style.css" />
+  <link rel="icon" href="/icon.png" type="image/png">
   <script type="module" src="/src/main.ts"></script>
 </head>
 
@@ -21,7 +23,6 @@
           </td>
         </tr>
         <tr>
-
           <td class="boardCol">
             <div id="board" class="board">
               <table cellspacing="0" cellpadding="0">
@@ -428,7 +429,7 @@
         </tr>
         <tr>
           <td>
-            <div id="error" class="hidden">not solveable</div>
+            <div id="error" class="hidden"></div>
           </td>
         </tr>
       </tbody>
@@ -441,17 +442,17 @@
       <tbody>
         <tr>
           <td>
-            <h3 class="dialog">New Game</h3>
-            <form method="dialog">
+            <h3 id="newGameHeadLine" class="dialog">New Game</h3>
+            <form id="formNewGame" method="dialog">
               <div class="dialog">
-                <label for="rangeValues">Count of given numbers</label>
+                <label id="labelCountNumbers" for="inputCountNumbers">Count of numbers: </label>
                 <input type="range" min="25" max="80" value="50" id="inputCountNumbers"
                   oninput="this.nextElementSibling.value = this.value" />
                 <output>50</output>
               </div>
               <div class="dialog"></div>
               <div class="dialog">
-                <label for="checkSolveable">Check if solveable</label>
+                <label id="labelCheckSolveable" for="checkSolveable">Check if solveable: </label>
                 <input type="checkbox" id="checkSolveable" checked="true">
               </div>
               <div class="dialog">
