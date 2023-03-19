@@ -15,6 +15,7 @@ export default class Ui {
         this.addClickEventResetGame();
         this.addClickEventActionNumber();
         this.addClickEventCells();
+        this.addClickEventDelete();
         this.generator = generator;
     }
 
@@ -72,6 +73,15 @@ export default class Ui {
 
     }
 
+    public addClickEventDelete() {
+
+        let deleteButton = <HTMLDivElement>document.getElementById("delete");
+        deleteButton.addEventListener("click", () => {
+            this.clickDelete()
+        });
+
+    }
+
     public addClickEventNewGame() {
 
         let start = <HTMLDivElement>document.getElementById("newGame");
@@ -81,8 +91,26 @@ export default class Ui {
 
     }
 
+    private clickDelete() {
+        this.removeColorsFromBord();
+        this.curActionNumber = 0;
+        for (let rowNo = 0; rowNo < GRID_SIZE; rowNo++) {
+            for (let colNo = 0; colNo < GRID_SIZE; colNo++) {
+
+                let value = this.board.rows[rowNo].cols[colNo].value;
+                if (value != 0 && this.board.rows[rowNo].cols[colNo].fix === false) {
+                    let cellName: string = "c" + rowNo.toString() + colNo.toString();
+                    let cell = <HTMLDivElement>document.getElementById(cellName);
+                    cell.classList.add("delete");
+                }
+            }
+        }
+    }
+
+
+
     private clickNewGame() {
-        this.requestCountNumbers(this.callBackNewGameStart);
+        this.requestNewGameOptions(this.callBackNewGameStart);
     }
 
     public addClickEventResetGame() {
@@ -107,6 +135,13 @@ export default class Ui {
             boardCells.item(counter)?.addEventListener("click", () => { this.clickCell(boardCells.item(counter)!); });
         }
     }
+    public isSolveableCheckRequired(): boolean {
+        let solveCheckBox = <HTMLInputElement>document.getElementById("checkSolveable");
+        console.log(solveCheckBox.value);
+        return solveCheckBox.checked;
+    }
+
+
     public clickCell(cell: Element) {
         let rowNo = parseInt(cell.id.substring(1, 2));
         let colNo = parseInt(cell.id.substring(2, 3));
@@ -116,6 +151,7 @@ export default class Ui {
             if (this.curActionNumber === 0) {
                 this.board.rows[rowNo].cols[colNo].value = this.curActionNumber;
                 divCell.innerText = "";
+                divCell.classList.remove("delete");
                 this.setColorOnBoard(this.curActionNumber);
                 return;
             }
@@ -125,7 +161,7 @@ export default class Ui {
             if (this.solver.isValueAllowed(boardCopy, colNo, rowNo, this.curActionNumber)) {
 
                 boardCopy.rows[rowNo].cols[colNo].value = this.curActionNumber;
-                if (this.solver.solve(boardCopy)) {
+                if (this.isSolveableCheckRequired() === false || this.solver.solve(boardCopy)) {
                     this.board.rows[rowNo].cols[colNo].value = this.curActionNumber;
                     divCell.innerText = this.curActionNumber.toString();
                     this.setColorOnBoard(this.curActionNumber);
@@ -174,6 +210,7 @@ export default class Ui {
             let colorName = "colorNumber" + color.toString();
             for (let counter: number = 0; counter < boardCells.length; counter++) {
                 boardCells.item(counter)?.classList.remove(colorName);
+                boardCells.item(counter)?.classList.remove("delete");
             }
         }
     }
@@ -213,7 +250,7 @@ export default class Ui {
         element?.classList.remove("hidden");
     }
 
-    public requestCountNumbers(callback: Function) {
+    public requestNewGameOptions(callback: Function) {
         let dialog = <HTMLDialogElement>document.getElementById("dialogNewGame");
         this.callBackNewGameStart = callback;
         dialog.showModal();

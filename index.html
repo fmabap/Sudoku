@@ -406,7 +406,7 @@
                         </td>
 
                         <td>
-                          <div class="actionNumber colorNumber0 actionNumberSel">
+                          <div id="delete" class="actionNumber delete">
                             delete
                           </div>
                         </td>
@@ -448,6 +448,11 @@
                 <input type="range" min="25" max="80" value="50" id="inputCountNumbers"
                   oninput="this.nextElementSibling.value = this.value" />
                 <output>50</output>
+              </div>
+              <div class="dialog"></div>
+              <div class="dialog">
+                <label for="checkSolveable">Check if solveable</label>
+                <input type="checkbox" id="checkSolveable" checked="true">
               </div>
               <div class="dialog">
                 <div id="dialogNewOk" class="dialogButton">Start Game

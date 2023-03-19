@@ -5,7 +5,7 @@ import Ui from "./ui";
 testConv();
 const generator = new Generator();
 const ui = new Ui(generator);
-ui.requestCountNumbers(showBoard);
+ui.requestNewGameOptions(showBoard);
 
 function testConv() {
     let bla: string = "";

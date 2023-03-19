@@ -139,7 +139,7 @@
  }
 
  .colorNumber7 {
-     background-color: red;
+     background-color: lightpink;
      color: black;
  }
 
@@ -153,6 +153,10 @@
      color: black;
  }
 
+ .delete {
+     background-color: red;
+     color: black;
+ }
 
  .fixCell {
      font-weight: bold;
@@ -193,6 +197,7 @@
      display: flex;
      justify-content: center;
      align-items: center;
+     margin-top: 10px;
  }
 
  .dialogButton {
