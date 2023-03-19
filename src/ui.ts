@@ -302,8 +302,8 @@ export default class Ui {
 
         if (navigator.language.indexOf("de") > -1) {
             newGameHeadLine.innerText = "Neues Spiel";
-            labelCountNumbers.innerText = "Anzahl Zahlen";
-            labelCheckSolveable.innerText = "Lösbarkeit überprüfen";
+            labelCountNumbers.innerText = "Anzahl Zahlen: ";
+            labelCheckSolveable.innerText = "Lösbarkeit überprüfen: ";
             dialogNewOk.innerText = "Spiel starten";
             deleteButton.innerText = "Entf.";
             resetGame.innerText = "Reset";
