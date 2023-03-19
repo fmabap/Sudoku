@@ -11,7 +11,7 @@ function init() {
 
     generator = new Generator();
     ui = new Ui(generator);
-    ui.requestNewGameOptions(showBoard);
+    setTimeout(() => { ui.requestNewGameOptions(showBoard) }, 2000);
 }
 
 function testConv() {
