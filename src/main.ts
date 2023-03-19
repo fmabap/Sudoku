@@ -2,10 +2,17 @@ import { GRID_SIZE } from "./declarations";
 import Generator from "./generator";
 import Ui from "./ui";
 
+window.addEventListener("load", () => { init() });
+
 testConv();
-const generator = new Generator();
-const ui = new Ui(generator);
-ui.requestNewGameOptions(showBoard);
+let generator: Generator
+let ui: Ui
+function init() {
+
+    generator = new Generator();
+    ui = new Ui(generator);
+    ui.requestNewGameOptions(showBoard);
+}
 
 function testConv() {
     let bla: string = "";

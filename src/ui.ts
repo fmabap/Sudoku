@@ -12,17 +12,22 @@ export default class Ui {
     errNotAllowed: string;
     constructor(generator: Generator) {
         this.solver = new Solver();
-        this.addClickEventDialogNewGameStart();
+        this.generator = generator;
+        this.errNotSolveable = "Not solveable";
+        this.errNotAllowed = "Not allowed"
+        this.addClickEvents();
+        this.setText();
+    }
+
+    private addClickEvents() {
         this.addClickEventNewGame();
         this.addClickEventResetGame();
         this.addClickEventActionNumber();
         this.addClickEventCells();
         this.addClickEventDelete();
         this.addClickEventToHeader();
-        this.generator = generator;
-        this.errNotSolveable = "Not solveable";
-        this.errNotAllowed = "Not allowed"
-        this.setText();
+        this.addClickEventDialogNewGameStart();
+
     }
 
     public initBoard(board: board) {
