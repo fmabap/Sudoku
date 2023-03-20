@@ -3,6 +3,11 @@
      background-color: black;
  }
 
+ #viewport-meta {
+     width: 100% !important;
+     height: 100% !important;
+ }
+
  .header {
      position: static;
      background-color: cornflowerblue;
