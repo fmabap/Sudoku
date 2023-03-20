@@ -12,9 +12,10 @@ function init() {
     generator = new Generator();
     ui = new Ui(generator);
     ui.requestNewGameOptions(showBoard);
-    var viewport_meta = document.getElementById('viewport-meta');
-    var content = `width=${window.innerWidth}, height=${window.innerHeight}, initial-scale=1, user-scalable=yes, maximum-scale=5`;
-    viewport_meta?.setAttribute("content", content);
+    /* var viewport_meta = document.getElementById('viewport-meta');
+     var content = `width=${window.innerWidth}, height=${window.innerHeight}, initial-scale=1, user-scalable=yes, maximum-scale=5`;
+     viewport_meta?.setAttribute("content", content);
+     */
 }
 
 function testConv() {
