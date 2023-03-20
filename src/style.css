@@ -3,6 +3,9 @@
      background-color: black;
      width: 100% !important;
      height: 100% !important;
+     transform: scale(1) !important;
+     transform-origin: 0 0 !important;
+
  }
 
  #viewport-meta {
@@ -49,6 +52,8 @@
      margin-right: 0.5rem !important;
      display: flex;
      justify-content: center;
+     transform: scale(1) !important;
+     transform-origin: 0 0 !important;
  }
 
 
