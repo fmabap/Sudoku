@@ -12,6 +12,8 @@ function init() {
     generator = new Generator();
     ui = new Ui(generator);
     ui.requestNewGameOptions(showBoard);
+    var viewport_meta = document.getElementById('viewport-meta');
+    viewport_meta?.setAttribute("content", "width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0")
 }
 
 function testConv() {
