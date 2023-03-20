@@ -13,7 +13,8 @@ function init() {
     ui = new Ui(generator);
     ui.requestNewGameOptions(showBoard);
     var viewport_meta = document.getElementById('viewport-meta');
-    viewport_meta?.setAttribute("content", "width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0")
+    var content = `width=${window.innerWidth}, height=${window.innerHeight}, initial-scale=1, user-scalable=yes, maximum-scale=5`;
+    viewport_meta?.setAttribute("content", content);
 }
 
 function testConv() {
