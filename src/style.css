@@ -1,6 +1,7 @@
  body {
      font-family: sans-serif;
      background-color: black;
+
  }
 
  .header {
@@ -19,8 +20,10 @@
  }
 
  .app {
+
      width: 100%;
      height: 100%;
+
  }
 
  .topTable {
@@ -40,21 +43,26 @@
  }
 
  .board {
-     display: flex;
+     display: grid;
      justify-content: center;
+     grid-template-columns: auto auto auto auto auto auto auto auto auto;
+     background-color: black;
  }
-
 
  .actions {
-     display: flex;
+     display: grid;
      justify-content: center;
+     grid-template-columns: auto auto auto auto auto;
+     background-color: black;
+     margin-top: 2rem;
+
  }
 
- .borderTop>td>div {
+ .borderTop {
      border-top: 4px solid white !important;
  }
 
- .borderBottom>td>div {
+ .borderBottom {
      border-bottom: 4px solid white !important;
  }
 
@@ -73,40 +81,116 @@
      margin: none;
  }
 
- .boardCell {
-     display: flex;
-     width: 3rem;
-     height: 3rem;
-     font-size: 24px;
-     color: white;
-     margin: 0;
-     padding: 0;
-     border: 1px white;
-     border-style: groove;
-     background-color: dimgray;
-     text-align: center;
-     justify-content: center;
-     align-items: center;
-     cursor: pointer;
+ @media only screen and (max-width: 470px) {
+
+     .boardCell {
+         display: flex;
+         width: 36px;
+         height: 36px;
+         font-size: 18px;
+         color: white;
+         margin: 0;
+         padding: 0;
+         border: 1px white;
+         border-style: groove;
+         background-color: dimgray;
+         text-align: center;
+         justify-content: center;
+         align-items: center;
+         cursor: pointer;
+     }
+
+     .actionNumber {
+         display: flex;
+         background-color: dimgray;
+         color: white;
+         box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
+         width: 36px;
+         height: 8px;
+         font-size: 18px;
+         margin-bottom: 10px;
+         margin-right: 10px;
+         padding-top: 0.5rem;
+         padding-bottom: 1.25rem;
+         border: 2px solid white;
+         border-radius: 10px;
+         justify-content: center;
+         text-align: center;
+         cursor: pointer;
+     }
+
+     .button {
+         background-color: dimgray;
+         color: white;
+         box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
+         font-size: 12px;
+         width: 36px;
+         height: 8px;
+         margin-bottom: 10px;
+         padding-top: 1em;
+         padding-bottom: 1em;
+         border: 2px solid white;
+         border-radius: 10px;
+         text-align: center;
+         cursor: pointer;
+     }
  }
 
- .actionNumber {
-     background-color: dimgray;
-     color: white;
-     box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
-     width: 3rem;
-     height: 1rem;
-     font-size: 24px;
-     margin-bottom: 10px;
-     margin-right: 10px;
-     padding-top: 0.5rem;
-     padding-bottom: 1.25rem;
-     border: 2px solid white;
-     border-radius: 10px;
-     justify-content: center;
-     text-align: center;
-     cursor: pointer;
+ @media only screen and (min-width: 471px) {
+
+     .boardCell {
+         display: flex;
+         width: 3rem;
+         height: 3rem;
+         font-size: 24px;
+         color: white;
+         margin: 0;
+         padding: 0;
+         border: 1px white;
+         border-style: groove;
+         background-color: dimgray;
+         text-align: center;
+         justify-content: center;
+         align-items: center;
+         cursor: pointer;
+     }
+
+     .actionNumber {
+         background-color: dimgray;
+         color: white;
+         box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
+         width: 3rem;
+         height: 1rem;
+         font-size: 24px;
+         margin-bottom: 10px;
+         margin-right: 10px;
+         padding-top: 0.5rem;
+         padding-bottom: 1.25rem;
+         border: 2px solid white;
+         border-radius: 10px;
+         justify-content: center;
+         text-align: center;
+         cursor: pointer;
+     }
+
+     .button {
+         background-color: dimgray;
+         color: white;
+         box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
+         width: 50px;
+         height: 1em;
+         margin-bottom: 10px;
+         padding-top: 1em;
+         padding-bottom: 1em;
+         border: 2px solid white;
+         border-radius: 10px;
+         text-align: center;
+         cursor: pointer;
+     }
  }
+
+
+
 
 
  .colorNumber1 {
@@ -218,20 +302,7 @@
      cursor: pointer;
  }
 
- .button {
-     background-color: dimgray;
-     color: white;
-     box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
-     width: 50px;
-     height: 1em;
-     margin-bottom: 10px;
-     padding-top: 1em;
-     padding-bottom: 1em;
-     border: 2px solid white;
-     border-radius: 10px;
-     text-align: center;
-     cursor: pointer;
- }
+
 
  #newGame {
      padding-top: 0.5em;
