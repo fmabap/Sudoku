@@ -123,9 +123,32 @@ export class Solver {
         }
         return true;
     }
+
+    public getValueCount(board: board): valueCount[] {
+        let valueCount: valueCount[] = [];
+
+        for (let value = 0; value <= GRID_SIZE; value++) {
+            valueCount.push({ count: 0 });
+        }
+
+        for (let rowNo = 0; rowNo < GRID_SIZE; rowNo++) {
+            for (let colNo = 0; colNo < GRID_SIZE; colNo++) {
+                let value = board.rows[rowNo].cols[colNo].value;
+                valueCount[value].count++;
+            }
+        }
+        return valueCount;
+    }
+
 }
-interface cell {
+
+export interface cell {
     rowNo: number,
     colNo: number,
     value: number
 }
+
+export interface valueCount {
+    count: number
+}
+

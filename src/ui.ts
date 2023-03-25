@@ -35,8 +35,23 @@ export default class Ui {
         this.curActionNumber = 1;
         this.placeOnBoard();
         this.removeColorsFromBord();
+        this.markActionsDone();
+        this.curActionNumber = this.setFreeActionNumber();
         this.setColorOnBoard(this.curActionNumber);
+
     }
+
+    private setFreeActionNumber(): number {
+        let actionNumber = document.getElementsByClassName("actionNumberSel");
+
+        for (let counter: number = 0; counter < actionNumber.length; counter++) {
+            if (!actionNumber.item(counter)?.classList.contains("actionNumberDone")) {
+                return counter + 1;
+            }
+        }
+        return 1;
+    }
+
     public placeOnBoard() {
         this.clearBoard();
         for (let rowNo = 0; rowNo < GRID_SIZE; rowNo++) {
@@ -204,6 +219,22 @@ export default class Ui {
         else {
             this.toastError(this.errNotAllowed);
         }
+        this.markActionsDone();
+    }
+
+    private markActionsDone() {
+        const valueCountArray = this.solver.getValueCount(this.board);
+        valueCountArray.forEach((valueCount, index) => {
+            if (index > 0) {
+                let actionNumber = "actionNumber" + index;
+                let actionNumberDiv = <HTMLDivElement>document.getElementById(actionNumber);
+                if (valueCount.count === GRID_SIZE) {
+                    actionNumberDiv.classList.add("actionNumberDone");
+                } else {
+                    actionNumberDiv.classList.remove("actionNumberDone");
+                }
+            }
+        })
     }
 
     private showWon() {
