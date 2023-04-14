@@ -191,6 +191,7 @@ export default class Ui {
                 divCell.innerText = "";
                 divCell.classList.remove("delete");
                 this.setColorOnBoard(this.curActionNumber);
+                this.markActionsDone();
                 return;
             }
 
