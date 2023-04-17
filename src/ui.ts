@@ -263,6 +263,10 @@ export default class Ui {
                 divCell.classList.remove("delete");
                 this.setColorOnBoard(this.curActionNumber);
                 this.markActionsDone();
+                if (!this.timer.isRunning()) {
+                    this.timer.start();
+                    this.showTime();
+                }
                 return;
             }
 
@@ -327,9 +331,14 @@ export default class Ui {
 
     private hideBreakDialog() {
         let dialog = <HTMLDialogElement>document.getElementById("dialogBreak");
-        dialog.close();
-        this.timer.start();
-        this.showTime();
+        if (this.solver.isWon(this.board)) {
+            dialog.close();
+        }
+        else {
+            dialog.close();
+            this.timer.start();
+            this.showTime();
+        }
     }
 
     public clickActionNumber(actionNumber: Element) {

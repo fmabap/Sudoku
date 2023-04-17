@@ -6,6 +6,9 @@ export class Timer {
     private ONE_MINUTE = 60000;
     private ONE_SECOND = 1000;
     public start() {
+        if (this.timerRunning) {
+            return;
+        }
         this.startTime = Date.now();
         this.timerRunning = true;
     }

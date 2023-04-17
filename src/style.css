@@ -51,25 +51,23 @@
 
  #status {
      display: grid;
-     grid-template-columns: auto auto auto;
+     grid-template-columns: 33% 34% 33%;
+     gap: 0;
      background-color: black;
  }
 
  #time {
      color: white;
-     display: flex;
      justify-self: left;
  }
 
  #countInitialNumbers {
      color: white;
-     display: flex;
      justify-self: center;
  }
 
  #errors {
      color: white;
-     display: flex;
      justify-self: right;
  }
 
