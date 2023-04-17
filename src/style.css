@@ -51,7 +51,7 @@
 
  #status {
      display: grid;
-     grid-template-columns: auto auto;
+     grid-template-columns: auto auto auto auto;
      background-color: black;
  }
 
@@ -61,6 +61,11 @@
      justify-self: left;
  }
 
+ #countInitialNumbers {
+     color: white;
+     display: flex;
+     justify-self: center;
+ }
 
  #errors {
      color: white;

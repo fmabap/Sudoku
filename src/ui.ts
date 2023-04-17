@@ -13,6 +13,7 @@ export default class Ui {
     timer: Timer;
     errors: number;
     isBoardInit: boolean;
+    countInitialNumbers: number;
 
     constructor(generator: Generator, timer: Timer) {
         this.solver = new Solver();
@@ -25,8 +26,10 @@ export default class Ui {
         this.timer = timer;
         this.errors = 0;
         this.timer.reset();
+        this.countInitialNumbers = 0;
         this.showTimeValue();
         this.showErrorCount();
+        this.shownCountInitialNumbers();
     }
 
     private addClickEvents() {
@@ -73,6 +76,13 @@ export default class Ui {
     private showErrorCount() {
         const divTime = <HTMLDivElement>document.getElementById("errors");
         divTime.innerText = this.getErrorsLabel() + this.errors;
+
+    }
+
+    private shownCountInitialNumbers() {
+        const divTime = <HTMLDivElement>document.getElementById("countInitialNumbers");
+
+        divTime.innerText = this.getCountInitialNumbersLabel() + this.countInitialNumbers;
 
     }
 
@@ -409,6 +419,8 @@ export default class Ui {
 
     private clickNewGameStart() {
         let dialog = <HTMLDialogElement>document.getElementById("dialogNewGame");
+        this.countInitialNumbers = this.getCountNumbers();
+        this.shownCountInitialNumbers();
         dialog.close();
         this.callBackNewGameStart();
     }
@@ -473,6 +485,15 @@ export default class Ui {
         }
         else {
             return "Errors: "
+        }
+    }
+
+    private getCountInitialNumbersLabel() {
+        if (navigator.language.indexOf("de") > -1) {
+            return "Anz. Nr. : "
+        }
+        else {
+            return "Count No. : "
         }
     }
 }
