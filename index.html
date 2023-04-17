@@ -18,7 +18,12 @@
       <div id="header" class="header">
         <span>Sudoku</span>
       </div>
-      <br>
+      <div id="status">
+        <div id="time">
+        </div>
+        <div id="errors">
+        </div>
+      </div>
 
       <div id="board" class="board">
         <div id="c00" class="boardCell borderLeft borderTop">
@@ -229,7 +234,7 @@
             </div>
             <div id="resetGame" class="button">Reset</div>
             <div></div>
-            <div></div>
+            <div id="break" class="button">Break</div>
             <div></div>
             <div id="newGame" class="button">New Game</div>
           </div>
@@ -237,41 +242,44 @@
       </div>
       <div id="won" class="hidden bar">You won</div>
       <div id="error" class="hidden bar"> </div>
-      <dialog id="dialogNewGame">
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <h3 id="newGameHeadLine" class="dialog">New Game</h3>
-                <form id="formNewGame" method="dialog">
-                  <div class="dialog">
-                    <label id="labelCountNumbers" for="inputCountNumbers">Count
-                      of numbers: </label>
-                    <input type="range" min="0" max="80" value="50"
-                      id="inputCountNumbers"
-                      oninput="this.nextElementSibling.value= this.value" />
-                    <output>50</output>
-                  </div>
-                  <div class="dialog"></div>
-                  <div class="dialog">
-                    <label id="labelCheckSolveable" for="checkSolveable">Check
-                      if solveable: </label>
-                    <input type="checkbox" id="checkSolveable" checked="true"
-                      />
 
-                  </div>
-                  <div class="dialog">
-                    <div id="dialogNewOk" class="dialogButton">Start Game
-                    </div>
-                  </div>
-                </form>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <dialog id="dialogBreak" class="overlay">
+        <form id="formBreak" method="dialog">
+          <div id="dialogBreakContent">
+            <h1 id="breakHeadLine">Break</h1>
+            <div id="continue" class="dialogButton">Continue</div>
+          </div>
+        </form>
       </dialog>
 
-    </div>
+      <dialog id="dialogNewGame">
+        <h3 id="newGameHeadLine" class="dialog">New Game</h3>
+        <form id="formNewGame" method="dialog">
+          <div class="dialog">
+            <label id="labelCountNumbers" for="inputCountNumbers">Count
+              of numbers: </label>
+            <input type="range" min="0" max="80" value="50"
+              id="inputCountNumbers"
+              oninput="this.nextElementSibling.value= this.value" />
+            <output>50</output>
+          </div>
+          <div class="dialog"></div>
+          <div class="dialog">
+            <label id="labelCheckSolveable" for="checkSolveable">Check
+              if solveable: </label>
+            <input type="checkbox" id="checkSolveable" checked="true"
+              />
 
+          </div>
+
+          <div id="dialogNewToolbar" class="dialogNewToolbar">
+            <div id="dialogNewOk" class="dialogButton">Start Game
+            </div>
+            <div id="dialogNewCancel" class="dialogButton">Cancel
+            </div>
+          </div>
+        </form>
+      </dialog>
+    </div>
   </body>
 </html>

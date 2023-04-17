@@ -1,5 +1,6 @@
 import { GRID_SIZE } from "./declarations";
 import Generator from "./generator";
+import { Timer } from "./timer";
 import Ui from "./ui";
 
 window.addEventListener("load", () => { init() });
@@ -7,11 +8,14 @@ window.addEventListener("load", () => { init() });
 testConv();
 let generator: Generator
 let ui: Ui
+let timer: Timer
 function init() {
 
     generator = new Generator();
-    ui = new Ui(generator);
+    timer = new Timer();
+    ui = new Ui(generator, timer);
     ui.requestNewGameOptions(showBoard);
+
     /* var viewport_meta = document.getElementById('viewport-meta');
      var content = `width=${window.innerWidth}, height=${window.innerHeight}, initial-scale=1, user-scalable=yes, maximum-scale=5`;
      viewport_meta?.setAttribute("content", content);

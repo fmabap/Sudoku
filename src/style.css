@@ -49,6 +49,26 @@
      background-color: black;
  }
 
+ #status {
+     display: grid;
+     grid-template-columns: auto auto;
+     background-color: black;
+ }
+
+ #time {
+     color: white;
+     display: flex;
+     justify-self: left;
+ }
+
+
+ #errors {
+     color: white;
+     display: flex;
+     justify-self: right;
+ }
+
+
  .actions {
      display: grid;
      justify-content: center;
@@ -98,6 +118,7 @@
          justify-content: center;
          align-items: center;
          cursor: pointer;
+         aspect-ratio: 1/1;
      }
 
      .actionNumber {
@@ -117,6 +138,7 @@
          justify-content: center;
          text-align: center;
          cursor: pointer;
+         aspect-ratio: 1/1;
      }
 
      .button {
@@ -133,6 +155,7 @@
          border-radius: 10px;
          text-align: center;
          cursor: pointer;
+         aspect-ratio: 1/1;
      }
  }
 
@@ -154,6 +177,7 @@
          justify-content: center;
          align-items: center;
          cursor: pointer;
+         aspect-ratio: 1/1;
      }
 
      .actionNumber {
@@ -173,6 +197,7 @@
          justify-content: center;
          text-align: center;
          cursor: pointer;
+         aspect-ratio: 1/1;
      }
 
      .button {
@@ -189,6 +214,7 @@
          border-radius: 10px;
          text-align: center;
          cursor: pointer;
+         aspect-ratio: 1/1;
      }
  }
 
@@ -209,6 +235,7 @@
          justify-content: center;
          align-items: center;
          cursor: pointer;
+         aspect-ratio: 1/1;
      }
 
      .actionNumber {
@@ -227,6 +254,7 @@
          justify-content: center;
          text-align: center;
          cursor: pointer;
+         aspect-ratio: 1/1;
      }
 
      .button {
@@ -242,12 +270,9 @@
          border-radius: 10px;
          text-align: center;
          cursor: pointer;
+         aspect-ratio: 1/1;
      }
  }
-
-
-
-
 
  .colorNumber1 {
      background-color: lightyellow;
@@ -334,6 +359,7 @@
 
  .hidden {
      visibility: hidden;
+     display: none;
  }
 
  .dialog {
@@ -341,24 +367,19 @@
      justify-content: center;
      align-items: center;
      margin-top: 10px;
-     font-size: 24px;
+     font-size: 20px;
  }
 
  .dialogButton {
      background-color: dimgray;
      color: white;
      box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
-     width: 100px;
-     margin-top: 10px;
-     padding-top: 0.5rem;
-     padding-bottom: 0.5rem;
+     font-size: 20px;
      border: 2px solid white;
      border-radius: 10px;
-     text-align: center;
+     padding: 0.5rem;
      cursor: pointer;
  }
-
-
 
  #newGame {
      padding-top: 0.5em;
@@ -369,4 +390,54 @@
      text-decoration: line-through;
      opacity: .5;
      ;
+ }
+
+ .dialogNewToolbar2 {
+     display: grid;
+     justify-content: center;
+     grid-template-columns: auto auto;
+     gap: 30px;
+     margin-top: 2rem;
+
+ }
+
+ .dialogNewToolbar1 {
+     display: grid;
+     justify-content: center;
+     grid-template-columns: auto;
+     gap: 30px;
+     margin-top: 2rem;
+ }
+
+ .overlay {
+     position: fixed;
+     /* Sit on top of the page content */
+
+     /* Hidden by default */
+     width: 100%;
+     /* Full width (cover the whole page) */
+     height: 100%;
+     /* Full height (cover the whole page) */
+     top: 0%;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background-color: rgba(0, 0, 0);
+     /* Black background with opacity */
+     z-index: 2;
+     /* Specify a stack order in case you're using a different order for other elements */
+     cursor: pointer;
+     /* Add a pointer on hover */
+ }
+
+ #dialogBreakContent {
+     padding-top: 35vh;
+     justify-content: center;
+     text-align: center;
+     align-content: center;
+     align-self: center;
+ }
+
+ #breakHeadLine {
+     color: white;
  }

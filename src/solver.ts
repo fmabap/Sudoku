@@ -27,7 +27,6 @@ export class Solver {
                 // No allowed value found
                 if (cells.length === 0) {
                     // no valid sudoku
-                    console.log("Sudoku not valid");
                     return false;
                 }
                 // Reset last cell and check it again with next allowed value
@@ -36,7 +35,7 @@ export class Solver {
                 valueSet = false;
             }
         }
-        console.log("Sudoku valid");
+        // Soduku Valid
         return true;
     }
 

@@ -1,7 +1,7 @@
 import { board, GRID_SIZE } from "./declarations";
 import { Solver } from "./solver";
 import Generator from "./generator";
-
+import { Timer } from "./timer";
 export default class Ui {
     board!: board
     curActionNumber!: number
@@ -10,13 +10,23 @@ export default class Ui {
     generator: Generator;
     errNotSolveable: string;
     errNotAllowed: string;
-    constructor(generator: Generator) {
+    timer: Timer;
+    errors: number;
+    isBoardInit: boolean;
+
+    constructor(generator: Generator, timer: Timer) {
         this.solver = new Solver();
         this.generator = generator;
+        this.isBoardInit = false;
         this.errNotSolveable = "Not solveable";
         this.errNotAllowed = "Not allowed"
         this.addClickEvents();
         this.setText();
+        this.timer = timer;
+        this.errors = 0;
+        this.timer.reset();
+        this.showTimeValue();
+        this.showErrorCount();
     }
 
     private addClickEvents() {
@@ -27,7 +37,9 @@ export default class Ui {
         this.addClickEventDelete();
         this.addClickEventToHeader();
         this.addClickEventDialogNewGameStart();
-
+        this.addClickEventDialogNewGameCancel();
+        this.addClickEventBreak();
+        this.addClickEventContinue();
     }
 
     public initBoard(board: board) {
@@ -38,6 +50,29 @@ export default class Ui {
         this.markActionsDone();
         this.curActionNumber = this.setFreeActionNumber();
         this.setColorOnBoard(this.curActionNumber);
+        this.errors = 0;
+        this.timer.reset();
+        this.timer.start();
+        this.showTime();
+        this.showErrorCount();
+        this.isBoardInit = true;
+    }
+
+    private showTime() {
+        if (this.timer.isRunning()) {
+            this.showTimeValue();
+            setTimeout(this.showTime.bind(this), 1000);
+        }
+    }
+
+    private showTimeValue() {
+        const divTime = <HTMLDivElement>document.getElementById("time");
+        divTime.innerText = this.getTimeLabel() + this.timer.getRunTime();
+    }
+
+    private showErrorCount() {
+        const divTime = <HTMLDivElement>document.getElementById("errors");
+        divTime.innerText = this.getErrorsLabel() + this.errors;
 
     }
 
@@ -106,9 +141,35 @@ export default class Ui {
 
         let start = <HTMLDivElement>document.getElementById("dialogNewOk");
         start.addEventListener("click", () => {
-            this.clickNewGameStart()
+            this.clickNewGameStart();
         });
 
+    }
+
+    public addClickEventDialogNewGameCancel() {
+
+        let start = <HTMLDivElement>document.getElementById("dialogNewCancel");
+        start.addEventListener("click", () => {
+            this.clickNewGameCancel();
+        });
+
+    }
+
+
+
+
+    public addClickEventBreak() {
+        let breakButton = <HTMLDivElement>document.getElementById("break");
+        breakButton.addEventListener("click", () => {
+            this.showBreakDialog();
+        });
+    }
+
+    public addClickEventContinue() {
+        let continueButton = <HTMLDivElement>document.getElementById("continue");
+        continueButton.addEventListener("click", () => {
+            this.hideBreakDialog();
+        });
     }
 
     public addClickEventDelete() {
@@ -148,6 +209,7 @@ export default class Ui {
 
 
     private clickNewGame() {
+        this.timer.stop();
         this.requestNewGameOptions(this.callBackNewGameStart);
     }
 
@@ -175,7 +237,6 @@ export default class Ui {
     }
     public isSolveableCheckRequired(): boolean {
         let solveCheckBox = <HTMLInputElement>document.getElementById("checkSolveable");
-        console.log(solveCheckBox.value);
         return solveCheckBox.checked;
     }
 
@@ -239,6 +300,7 @@ export default class Ui {
     }
 
     private showWon() {
+        this.timer.stop();
         this.setElementVisible("won");
         setTimeout(() => { this.hideWon() }, 5000);
     }
@@ -246,6 +308,20 @@ export default class Ui {
     private hideWon() {
         this.setElementInvisible("won");
     }
+
+    private showBreakDialog() {
+        this.timer.stop();
+        let dialog = <HTMLDialogElement>document.getElementById("dialogBreak");
+        dialog.showModal();
+    }
+
+    private hideBreakDialog() {
+        let dialog = <HTMLDialogElement>document.getElementById("dialogBreak");
+        dialog.close();
+        this.timer.start();
+        this.showTime();
+    }
+
     public clickActionNumber(actionNumber: Element) {
 
         this.removeColorsFromBord();
@@ -288,8 +364,11 @@ export default class Ui {
     private toastError(error: string, time: number = 1000) {
         let divError = <HTMLDivElement>document.getElementById("error");
         divError.innerText = error;
+        this.errors = this.errors + 1;
+        this.showErrorCount();
         this.setElementVisible("error");
         setTimeout(() => { this.hideError() }, time);
+
     }
     private hideError() {
         this.setElementInvisible("error");
@@ -307,6 +386,18 @@ export default class Ui {
 
     public requestNewGameOptions(callback: Function) {
         let dialog = <HTMLDialogElement>document.getElementById("dialogNewGame");
+        let cancelButton = <HTMLDivElement>document.getElementById("dialogNewCancel");
+        let dialogNewToolbar = <HTMLDivElement>document.getElementById("dialogNewToolbar");
+        if (this.isBoardInit) {
+            cancelButton.classList.remove("hidden");
+            dialogNewToolbar.classList.add("dialogNewToolbar2");
+            dialogNewToolbar.classList.remove("dialogNewToolbar1");
+        }
+        else {
+            cancelButton.classList.add("hidden");
+            dialogNewToolbar.classList.remove("dialogNewToolbar2");
+            dialogNewToolbar.classList.add("dialogNewToolbar1");
+        }
         this.callBackNewGameStart = callback;
         dialog.showModal();
     }
@@ -321,15 +412,32 @@ export default class Ui {
         dialog.close();
         this.callBackNewGameStart();
     }
+    private clickNewGameCancel() {
+        let dialog = <HTMLDialogElement>document.getElementById("dialogNewGame");
+        if (this.solver.isWon(this.board)) {
+            dialog.close();
+        }
+        else {
+            dialog.close();
+            this.timer.start();
+            this.showTime();
+        }
+    }
+
+
     private setText() {
         let newGameHeadLine = <HTMLHeadingElement>document.getElementById("newGameHeadLine")
         let labelCountNumbers = <HTMLLabelElement>document.getElementById("labelCountNumbers");
         let labelCheckSolveable = <HTMLLabelElement>document.getElementById("labelCheckSolveable");
         let dialogNewOk = <HTMLDivElement>document.getElementById("dialogNewOk");
-        let deleteButton = <HTMLDivElement>document.getElementById("delete")
-        let resetGame = <HTMLDivElement>document.getElementById("resetGame")
-        let newGame = <HTMLDivElement>document.getElementById("newGame")
-        let won = <HTMLDivElement>document.getElementById("won")
+        let dialogNewCancel = <HTMLDivElement>document.getElementById("dialogNewCancel");
+        let deleteButton = <HTMLDivElement>document.getElementById("delete");
+        let resetGame = <HTMLDivElement>document.getElementById("resetGame");
+        let newGame = <HTMLDivElement>document.getElementById("newGame");
+        let breakButton = <HTMLDivElement>document.getElementById("break");
+        let won = <HTMLDivElement>document.getElementById("won");
+        let continueButton = <HTMLDivElement>document.getElementById("continue");
+        let breakHeadLine = <HTMLHeadingElement>document.getElementById("breakHeadLine");
 
 
         if (navigator.language.indexOf("de") > -1) {
@@ -337,12 +445,34 @@ export default class Ui {
             labelCountNumbers.innerText = "Anzahl Zahlen: ";
             labelCheckSolveable.innerText = "Lösbarkeit überprüfen: ";
             dialogNewOk.innerText = "Spiel starten";
+            dialogNewCancel.innerText = "Abbrechen";
             deleteButton.innerText = "Entf.";
             resetGame.innerText = "Reset";
             newGame.innerHTML = "Neues Spiel";
             won.innerHTML = "Du hast gewonnen"
+            breakButton.innerText = "Pause";
+            breakHeadLine.innerText = "Pause";
             this.errNotSolveable = "Nicht lösbar";
             this.errNotAllowed = "Nicht erlaubt";
+            continueButton.innerHTML = "Weiter";
+
+        }
+    }
+    private getTimeLabel() {
+        if (navigator.language.indexOf("de") > -1) {
+            return "Zeit: "
+        }
+        else {
+            return "Time: "
+        }
+    }
+
+    private getErrorsLabel() {
+        if (navigator.language.indexOf("de") > -1) {
+            return "Fehler: "
+        }
+        else {
+            return "Errors: "
         }
     }
 }
