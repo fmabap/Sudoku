@@ -284,15 +284,20 @@ export default class Ui {
                     }
                 }
                 else {
+                    this.increaseErrorCount();
                     this.toastError(this.errNotSolveable);
                 }
 
             }
             else {
+                this.increaseErrorCount();
                 this.toastError(this.errNotAllowed);
             }
         }
         else {
+            if (this.curActionNumber != 0) {
+                this.increaseErrorCount();
+            }
             this.toastError(this.errNotAllowed);
         }
         this.markActionsDone();
@@ -383,12 +388,14 @@ export default class Ui {
     private toastError(error: string, time: number = 1000) {
         let divError = <HTMLDivElement>document.getElementById("error");
         divError.innerText = error;
-        this.errors = this.errors + 1;
-        this.showErrorCount();
         this.setElementVisible("error");
         setTimeout(() => { this.hideError() }, time);
-
     }
+    private increaseErrorCount() {
+        this.errors = this.errors + 1;
+        this.showErrorCount();
+    }
+
     private hideError() {
         this.setElementInvisible("error");
     }
