@@ -395,6 +395,10 @@
      ;
  }
 
+ .actionNumberSelected {
+     border-color: orange;
+ }
+
  .dialogNewToolbar2 {
      display: grid;
      justify-content: center;

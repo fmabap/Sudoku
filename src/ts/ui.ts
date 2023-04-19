@@ -14,6 +14,7 @@ export default class Ui {
     errors: number;
     isBoardInit: boolean;
     countInitialNumbers: number;
+    markNumbers: boolean;
 
     constructor(generator: Generator, timer: Timer) {
         this.solver = new Solver();
@@ -27,6 +28,7 @@ export default class Ui {
         this.errors = 0;
         this.timer.reset();
         this.countInitialNumbers = 0;
+        this.markNumbers = true;
         this.showTimeValue();
         this.showErrorCount();
         this.shownCountInitialNumbers();
@@ -52,6 +54,7 @@ export default class Ui {
         this.removeColorsFromBord();
         this.markActionsDone();
         this.curActionNumber = this.setFreeActionNumber();
+        this.markNumbers = this.getMarkNumbers();
         this.setColorOnBoard(this.curActionNumber);
         this.errors = 0;
         this.timer.reset();
@@ -59,6 +62,11 @@ export default class Ui {
         this.showTime();
         this.showErrorCount();
         this.isBoardInit = true;
+    }
+
+    private getMarkNumbers() {
+        const markNumbersCheckBox = <HTMLInputElement>document.getElementById("markNumbers");
+        return markNumbersCheckBox.checked;
     }
 
     private showTime() {
@@ -203,6 +211,7 @@ export default class Ui {
     private clickDelete() {
         this.removeColorsFromBord();
         this.curActionNumber = 0;
+        this.markActionButton(0);
         for (let rowNo = 0; rowNo < GRID_SIZE; rowNo++) {
             for (let colNo = 0; colNo < GRID_SIZE; colNo++) {
 
@@ -215,8 +224,6 @@ export default class Ui {
             }
         }
     }
-
-
 
     private clickNewGame() {
         this.timer.stop();
@@ -369,19 +376,42 @@ export default class Ui {
             }
         }
     }
+    private markActionButton(color: number) {
+        // Mark Action Button of the current action
+        let relAction: string
+        if (color === 0) {
+            relAction = "delete"
+        }
+        else {
+            relAction = "colorNumber" + color.toString();
+        }
+        let actionNumbers = document.getElementsByClassName("actionNumber");
+
+        // remove all markings and mark only relevant action
+        for (let counter: number = 0; counter < actionNumbers.length; counter++) {
+            actionNumbers.item(counter)?.classList.remove("actionNumberSelected");
+            if (actionNumbers.item(counter)?.classList.contains(relAction)) {
+                actionNumbers.item(counter)?.classList.add("actionNumberSelected");
+            }
+        }
+
+    }
+
     private setColorOnBoard(color: number) {
         this.curActionNumber = color;
+        this.markActionButton(color);
+        // Mark numbers on the board if this option is set
+        if (this.markNumbers === false) {
+            return;
+        }
         let colorName = "colorNumber" + color.toString();
         for (let rowNo = 0; rowNo < GRID_SIZE; rowNo++) {
             for (let colNo = 0; colNo < GRID_SIZE; colNo++) {
-
                 if (this.board.rows[rowNo].cols[colNo].value === color) {
                     let cellName: string = "c" + rowNo.toString() + colNo.toString();
                     let cell = <HTMLDivElement>document.getElementById(cellName);
                     cell.classList.add(colorName);
                 }
-
-
             }
         }
     }
@@ -457,6 +487,7 @@ export default class Ui {
         let newGameHeadLine = <HTMLHeadingElement>document.getElementById("newGameHeadLine")
         let labelCountNumbers = <HTMLLabelElement>document.getElementById("labelCountNumbers");
         let labelCheckSolveable = <HTMLLabelElement>document.getElementById("labelCheckSolveable");
+        let labelMarkNumbers = <HTMLLabelElement>document.getElementById("labelMarkNumbers");
         let dialogNewOk = <HTMLDivElement>document.getElementById("dialogNewOk");
         let dialogNewCancel = <HTMLDivElement>document.getElementById("dialogNewCancel");
         let deleteButton = <HTMLDivElement>document.getElementById("delete");
@@ -472,6 +503,7 @@ export default class Ui {
             newGameHeadLine.innerText = "Neues Spiel";
             labelCountNumbers.innerText = "Anzahl Zahlen: ";
             labelCheckSolveable.innerText = "Lösbarkeit überprüfen: ";
+            labelMarkNumbers.innerText = "Zahlen markieren: ";
             dialogNewOk.innerText = "Spiel starten";
             dialogNewCancel.innerText = "Abbrechen";
             deleteButton.innerText = "Entf.";
