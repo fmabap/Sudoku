@@ -9,7 +9,7 @@ export default defineConfig({
             manifest: {
                 name: "Sudoku",
                 short_name: "Sudoku",
-                theme_color: "#317EFB",
+                theme_color: "#000000",
                 icons: [
                     {
                         src: "./icon.png",
