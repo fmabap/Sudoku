@@ -6,6 +6,7 @@ export default defineConfig({
     // config options
     plugins: [VitePWA(
         {
+            registerType: "autoUpdate",
             manifest: {
                 name: "Sudoku",
                 short_name: "Sudoku",
