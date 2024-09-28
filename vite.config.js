@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
+import { viteSingleFile } from "vite-plugin-singlefile";
 
 // vite.config.js
 export default defineConfig({
@@ -20,7 +21,8 @@ export default defineConfig({
                     }
                 ]
             }
-        })],
+        }),
+        viteSingleFile()],
     base: "./",
     root: "./src",
     build: {
