@@ -15,6 +15,10 @@ export default defineConfig({
             },
             workbox: {
                 globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg}'],
+                navigateFallback: 'index.html',
+                navigateFallbackDenylist: [/^\/[^/]+.(?!webmanifest$).*$/],
+                skipWaiting: true,
+                clientsClaim: true,
                 runtimeCaching: [
                     {
                         urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -29,6 +33,39 @@ export default defineConfig({
                                 statuses: [0, 200]
                             }
                         }
+                    },
+                    {
+                        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/,
+                        handler: "CacheFirst",
+                        options: {
+                            cacheName: "images",
+                            expiration: {
+                                maxEntries: 50,
+                                maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
+                            }
+                        }
+                    },
+                    {
+                        urlPattern: /\.(?:js|css)$/,
+                        handler: "StaleWhileRevalidate",
+                        options: {
+                            cacheName: "assets",
+                            expiration: {
+                                maxEntries: 30,
+                                maxAgeSeconds: 7 * 24 * 60 * 60 // 7 days
+                            }
+                        }
+                    },
+                    {
+                        urlPattern: /\.(?:html)$/,
+                        handler: "NetworkFirst",
+                        options: {
+                            cacheName: "pages",
+                            networkTimeoutSeconds: 3,
+                            expiration: {
+                                maxEntries: 10
+                            }
+                        }
                     }
                 ]
             },
@@ -40,6 +77,7 @@ export default defineConfig({
                 background_color: "#ffffff",
                 display: "standalone",
                 start_url: "./index.html",
+                id: "/",
                 icons: [
                     {
                         src: "./icon.png",

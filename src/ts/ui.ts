@@ -468,7 +468,12 @@ export default class Ui {
         this.countInitialNumbers = this.getCountNumbers();
         this.shownCountInitialNumbers();
         dialog.close();
-        this.callBackNewGameStart();
+        // Ensure callback is executed after the dialog is closed
+        setTimeout(() => {
+            if (typeof this.callBackNewGameStart === 'function') {
+                this.callBackNewGameStart();
+            }
+        }, 0);
     }
     private clickNewGameCancel() {
         let dialog = <HTMLDialogElement>document.getElementById("dialogNewGame");
