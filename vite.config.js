@@ -9,6 +9,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       strategies: "generateSW",
+      includeAssets: ["favicon.png", "icon.png"],
       injectRegister: "inline",
       devOptions: {
         enabled: true,
