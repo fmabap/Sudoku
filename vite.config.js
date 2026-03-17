@@ -9,7 +9,6 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       strategies: "generateSW",
-      includeAssets: ["favicon.png", "icon.png"],
       injectRegister: "inline",
       devOptions: {
         enabled: true,
@@ -17,7 +16,6 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*.{html,ico,png,svg,webmanifest}"],
         navigateFallback: "index.html",
-        navigateFallbackDenylist: [/^\/[^/]+.(?!webmanifest$).*$/],
         skipWaiting: true,
         clientsClaim: true,
       },
