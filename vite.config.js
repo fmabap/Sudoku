@@ -9,15 +9,10 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       strategies: "generateSW",
+      includeAssets: ["favicon.png", "icon.png"],
       injectRegister: "inline",
       devOptions: {
         enabled: true,
-      },
-      workbox: {
-        globPatterns: ["**/*.{html,ico,png,svg,webmanifest}"],
-        navigateFallback: "index.html",
-        skipWaiting: true,
-        clientsClaim: true,
       },
       manifest: {
         name: "Sudoku",
@@ -27,7 +22,6 @@ export default defineConfig({
         background_color: "#ffffff",
         display: "standalone",
         start_url: "./index.html",
-        id: "/",
         icons: [
           {
             src: "./icon.png",
@@ -37,14 +31,20 @@ export default defineConfig({
           },
         ],
       },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        navigateFallback: "index.html",
+        navigateFallbackDenylist: [/^\/[^/]+.(?!webmanifest$).*$/],
+        skipWaiting: true,
+        clientsClaim: true,
+      },
     }),
     viteSingleFile(),
   ],
   base: "./",
-  root: "./src",
   build: {
     emptyOutDir: true,
-    outDir: "./../docs",
+    outDir: "./docs",
     publicDir: "./public",
   },
 });

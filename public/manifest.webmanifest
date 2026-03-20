@@ -1,0 +1,18 @@
+{
+    "name": "Sudoku",
+    "short_name": "Sudoku",
+    "description": "Play Sudoku offline anytime",
+    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "portrait",
+    "start_url": "./index.html",
+    "icons": [
+        {
+            "src": "./icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
