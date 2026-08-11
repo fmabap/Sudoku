@@ -1,6 +1,27 @@
-body {
+:root {
+     /* round to a whole pixel: fractional widths make Chromium drop border-left on grid items */
+     --size: round(down, clamp(14px, min(calc((100vw - 1rem) / 9), calc((100dvh - 10.75rem) / 12)), 3rem), 1px);
+     --cell-size: var(--size);
+     --action-size: var(--size);
+     --edge-gap: clamp(0.5rem, 3vw, 1.25rem);
+ }
+
+ *, *::before, *::after {
+     box-sizing: border-box;
+ }
+
+ html, body {
+     height: 100%;
+     margin: 0;
+     width: 100%;
+     overflow-x: hidden;
+ }
+
+ body {
      font-family: sans-serif;
      background-color: black;
+     min-height: 100dvh;
+     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 
  }
 
@@ -14,7 +35,8 @@ body {
      text-align: center;
      padding-top: 0.5rem;
      padding-bottom: 0.5rem;
-     margin-bottom: 10px;
+     width: calc(100% - var(--edge-gap) * 2);
+     margin: var(--edge-gap) auto 10px;
      box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
      text-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
      cursor: pointer;
@@ -54,6 +76,7 @@ body {
      display: grid;
      grid-template-columns: 33% 34% 33%;
      gap: 0;
+     padding: 0 var(--edge-gap);
      background-color: black;
  }
 
@@ -77,6 +100,7 @@ body {
      display: grid;
      justify-content: center;
      grid-template-columns: auto auto auto auto auto;
+     gap: 10px;
      background-color: black;
      margin-top: 2rem;
 
@@ -105,177 +129,56 @@ body {
      margin: none;
  }
 
- @media only screen and (max-width: 350px) {
-
-     .boardCell {
-         display: flex;
-         width: 25px;
-         height: 25px;
-         font-size: 14px;
-         color: white;
-         margin: 0;
-         padding: 0;
-         border: 1px white;
-         border-style: groove;
-         background-color: dimgray;
-         text-align: center;
-         justify-content: center;
-         align-items: center;
-         cursor: pointer;
-         aspect-ratio: 1/1;
-     }
-
-     .actionNumber {
-         display: flex;
-         background-color: dimgray;
-         color: white;
-         box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
-         width: 36px;
-         height: 16px;
-         font-size: 16px;
-         margin-bottom: 10px;
-         margin-right: 10px;
-         padding-top: 0.5rem;
-         padding-bottom: 0.5rem;
-         border: 2px solid white;
-         border-radius: 10px;
-         justify-content: center;
-         text-align: center;
-         cursor: pointer;
-         aspect-ratio: 1/1;
-     }
-
-     .button {
-         background-color: dimgray;
-         color: white;
-         box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
-         font-size: 12px;
-         width: 36px;
-         height: 8px;
-         margin-bottom: 10px;
-         padding-top: 0.75rem;
-         padding-bottom: 1rem;
-         border: 2px solid white;
-         border-radius: 10px;
-         text-align: center;
-         cursor: pointer;
-         aspect-ratio: 1/1;
-     }
+ .boardCell {
+     display: flex;
+     width: var(--cell-size);
+     height: var(--cell-size);
+     font-size: calc(var(--cell-size) * 0.5);
+     color: white;
+     margin: 0;
+     padding: 0;
+     border: 1px white;
+     border-style: groove;
+     background-color: dimgray;
+     text-align: center;
+     justify-content: center;
+     align-items: center;
+     cursor: pointer;
+     aspect-ratio: 1/1;
  }
 
-
- @media only screen and (min-width: 351px) {
-
-     .boardCell {
-         display: flex;
-         width: 36px;
-         height: 36px;
-         font-size: 18px;
-         color: white;
-         margin: 0;
-         padding: 0;
-         border: 1px white;
-         border-style: groove;
-         background-color: dimgray;
-         text-align: center;
-         justify-content: center;
-         align-items: center;
-         cursor: pointer;
-         aspect-ratio: 1/1;
-     }
-
-     .actionNumber {
-         display: flex;
-         background-color: dimgray;
-         color: white;
-         box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
-         width: 36px;
-         height: 8px;
-         font-size: 18px;
-         margin-bottom: 10px;
-         margin-right: 10px;
-         padding-top: 0.5rem;
-         padding-bottom: 1.25rem;
-         border: 2px solid white;
-         border-radius: 10px;
-         justify-content: center;
-         text-align: center;
-         cursor: pointer;
-         aspect-ratio: 1/1;
-     }
-
-     .button {
-         background-color: dimgray;
-         color: white;
-         box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
-         font-size: 12px;
-         width: 36px;
-         height: 8px;
-         margin-bottom: 10px;
-         padding-top: 0.75rem;
-         padding-bottom: 1rem;
-         border: 2px solid white;
-         border-radius: 10px;
-         text-align: center;
-         cursor: pointer;
-         aspect-ratio: 1/1;
-     }
+ .actionNumber {
+     display: flex;
+     background-color: dimgray;
+     color: white;
+     box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
+     width: var(--action-size);
+     height: var(--action-size);
+     font-size: calc(var(--action-size) * 0.5);
+     border: 2px solid white;
+     border-radius: 10px;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+     cursor: pointer;
+     aspect-ratio: 1/1;
  }
 
- @media only screen and (min-width: 471px) {
-
-     .boardCell {
-         display: flex;
-         width: 3rem;
-         height: 3rem;
-         font-size: 24px;
-         color: white;
-         margin: 0;
-         padding: 0;
-         border: 1px white;
-         border-style: groove;
-         background-color: dimgray;
-         text-align: center;
-         justify-content: center;
-         align-items: center;
-         cursor: pointer;
-         aspect-ratio: 1/1;
-     }
-
-     .actionNumber {
-         background-color: dimgray;
-         color: white;
-         box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
-         width: 3rem;
-         height: 1rem;
-         font-size: 24px;
-         margin-bottom: 10px;
-         margin-right: 10px;
-         padding-top: 0.5rem;
-         padding-bottom: 1.25rem;
-         border: 2px solid white;
-         border-radius: 10px;
-         justify-content: center;
-         text-align: center;
-         cursor: pointer;
-         aspect-ratio: 1/1;
-     }
-
-     .button {
-         background-color: dimgray;
-         color: white;
-         box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
-         width: 50px;
-         height: 1em;
-         margin-bottom: 10px;
-         padding-top: 1em;
-         padding-bottom: 1em;
-         border: 2px solid white;
-         border-radius: 10px;
-         text-align: center;
-         cursor: pointer;
-         aspect-ratio: 1/1;
-     }
+ .button {
+     display: flex;
+     background-color: dimgray;
+     color: white;
+     box-shadow: inset -5px -5px 10px rgba(0, 0, 0, .5);
+     font-size: clamp(10px, 3vmin, 12px);
+     width: var(--action-size);
+     height: var(--action-size);
+     border: 2px solid white;
+     border-radius: 10px;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+     cursor: pointer;
+     aspect-ratio: 1/1;
  }
 
  .colorNumber1 {
@@ -347,18 +250,21 @@ body {
 
  .bar {
      height: 5rem;
-     padding-top: 3rem;
+     display: flex;
+     justify-content: center;
+     align-items: center;
      border: 2px solid white;
      border-radius: 10px;
      box-shadow: inset -3px -3px 5px rgba(0, 0, 0, .5);
      text-align: center;
      position: fixed;
-     align-self: center;
      font-size: xx-large;
      font-weight: bold;
      width: 80%;
-     left: 10%;
-     top: 45%;
+     max-width: 500px;
+     left: 50%;
+     top: 50%;
+     transform: translate(-50%, -50%);
  }
 
  .hidden {
@@ -383,11 +289,6 @@ body {
      border-radius: 10px;
      padding: 0.5rem;
      cursor: pointer;
- }
-
- #newGame {
-     padding-top: 0.5em;
-     padding-bottom: 1.75em;
  }
 
  .actionNumberDone {
@@ -468,3 +369,22 @@ dialog {
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.7);
 }
+
+/* short landscape screens (phones): shrink header/spacing so board + all action buttons fit without scrolling */
+@media (orientation: landscape) and (max-height: 500px) {
+     :root {
+         --size: round(down, clamp(14px, min(calc((100vw - 1rem) / 9), calc((100dvh - 6rem) / 12)), 3rem), 1px);
+     }
+
+     .header {
+         font-size: large;
+         padding-top: 0.2rem;
+         padding-bottom: 0.2rem;
+         margin: 0.2rem auto 6px;
+     }
+
+     .actions {
+         margin-top: 0.5rem;
+         gap: 6px;
+     }
+ }
