@@ -32,6 +32,31 @@ export default class Ui {
         this.showTimeValue();
         this.showErrorCount();
         this.shownCountInitialNumbers();
+        this.setupButtonAutoFit();
+    }
+
+    // shrinks a button's font size until its label fits, whenever the button is resized (e.g. responsive breakpoints)
+    private setupButtonAutoFit() {
+        const buttons = [
+            ...Array.from(document.getElementsByClassName("button")),
+            ...Array.from(document.getElementsByClassName("actionNumber")),
+        ] as HTMLElement[];
+
+        const fitButtonText = (el: HTMLElement) => {
+            el.style.fontSize = "";
+            let fontSize = parseFloat(getComputedStyle(el).fontSize);
+            el.style.fontSize = fontSize + "px";
+            const overflows = () => el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight;
+            while (overflows() && fontSize > 6) {
+                fontSize -= 1;
+                el.style.fontSize = fontSize + "px";
+            }
+        };
+
+        const observer = new ResizeObserver(entries => {
+            entries.forEach(entry => fitButtonText(<HTMLElement>entry.target));
+        });
+        buttons.forEach(button => observer.observe(button));
     }
 
     private addClickEvents() {
